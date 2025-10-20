@@ -1,0 +1,10 @@
+server:
+  port: 5006
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
