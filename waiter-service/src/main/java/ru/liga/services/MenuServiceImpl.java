@@ -8,27 +8,33 @@ import java.util.Random;
 @Service
 public class MenuServiceImpl implements MenuService {
 
-	@Override
-	public Menu get() {
-		Menu menu = new Menu();
-		menu.setId(new Random().nextInt());
-		menu.setName("Меню");
-		menu.setPrice(new Random().nextFloat());
-		return menu;
-	}
+    @Override
+    public Menu get() {
+        Menu menu = new Menu();
+        menu.setId(new Random().nextInt());
+        menu.setName("Меню");
+        menu.setPrice(new Random().nextFloat());
+        return menu;
+    }
 
-	@Override
-	public Menu delete(int id) {
-		return new Menu(id,"Удаленное меню",0);
-	}
+    @Override
+    public Menu delete(int id) {
+        return new Menu(id, "Удаленное меню", 0);
+    }
 
-	@Override
-	public Menu create(Menu menu) {
-		return menu;
-	}
+    @Override
+    public Menu create(Menu menu) {
+        if (menu.getName().isEmpty() || menu.getPrice() < 0) {
+            throw new NullPointerException("Проверьте правильность заполнения данных и повторите попытку.");
+        }
+        return menu;
+    }
 
-	@Override
-	public Menu update(int id, Menu menu) {
-		return menu;
-	}
+    @Override
+    public Menu update(int id, Menu menu) {
+        if (menu.getName().isEmpty() || menu.getPrice() < 0) {
+            throw new NullPointerException("Проверьте правильность заполнения данных и повторите попытку.");
+        }
+        return menu;
+    }
 }
