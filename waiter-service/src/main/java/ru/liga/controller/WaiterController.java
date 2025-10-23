@@ -1,17 +1,26 @@
 package ru.liga.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.liga.dto.Menu;
 import ru.liga.dto.Order;
+import ru.liga.feign.WaiterFeign;
 import ru.liga.services.MenuServiceImpl;
 import ru.liga.services.OrderServiceImpl;
 
 @RestController
 @RequestMapping("/waiters")
+@RequiredArgsConstructor
 public class WaiterController {
 
 	MenuServiceImpl waiterServiceImpl;
     OrderServiceImpl orderServiceImpl;
+    private final WaiterFeign waiterFeign;
+
+    @GetMapping("/CanCook")
+    public boolean CanCookKitchen(){
+        return waiterFeign.CanCookTheOrder();
+    }
 
 	@GetMapping("/")
 	public Menu getMenu(){
@@ -52,5 +61,11 @@ public class WaiterController {
     public Order updateOrder(@PathVariable int id, Order order){
         return orderServiceImpl.update(id, order);
     }
+
+    @PutMapping("/order/status/{id}")
+    public Order updateStatus(@PathVariable int id, Order order){
+        return orderServiceImpl.update(id, order);
+    }
+
 
 }

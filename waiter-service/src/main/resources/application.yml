@@ -8,3 +8,17 @@ management:
   endpoint:
     health:
       show-details: ALWAYS
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method
+    tags-sorter: alpha
+  show-actuator: false
+
+feign:
+  clients:
+    kitchen-service:
+      url: http://localhost:8080/kitchen

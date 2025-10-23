@@ -5,16 +5,15 @@ import ru.liga.dto.Order;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Random;
 
 public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order get() {
         Order order = new Order();
-        order.setId(new Random().nextInt());
-        order.setDishes(new ArrayList<>(Collections.singleton(String.valueOf(new Random().nextInt()))));
-        order.setStatus(String.valueOf(new Random().nextInt()));
+        order.setId(1);
+        order.setDishes(new ArrayList<>(Collections.singleton("ABOBA")));
+        order.setStatus("Готовится");
         return order;
     }
 
