@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.core.annotation.Order;
 import org.springframework.web.bind.annotation.*;
 import ru.liga.dto.Dish;
+import ru.liga.dto.Status;
 import ru.liga.feign.KitchenFeign;
 import ru.liga.services.KitchenServiceImpl;
 
@@ -14,13 +15,12 @@ import java.util.Random;
 @RequiredArgsConstructor
 public class KitchenController {
     KitchenServiceImpl kitchenService;
-    KitchenFeign kitchenFeign;
+    private final KitchenFeign kitchenFeign;
 
-    @PutMapping("/order/{id}")
-    Order updateOrder(@PathVariable int id, Order order){
-        return kitchenFeign.updateOrder(id, order);
+    @PutMapping("/status/{id}&{status}")
+	String updateStatus(@PathVariable(name = "id") int id,@PathVariable(name = "status") String status){
+        return kitchenFeign.updateStatus(id, status);
     }
-
     @GetMapping("/CanCook")
     public boolean CanCookTheOrder(){
         return new Random().nextBoolean();
